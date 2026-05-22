@@ -1,66 +1,50 @@
 # Jarvis Flávio
 
-Assistente pessoal desenvolvido em Python com:
+Assistente acadêmico inteligente desenvolvido em Python utilizando:
 
-- Sistema de tarefas
-- Agenda
-- RAG com PDFs
-- Quiz interativo
-- Tool Calling com LLM
+- RAG (Retrieval Augmented Generation)
+- Tool Calling
+- LLM Gemma 3 12B
 - Busca semântica com embeddings
+- Sistema de aprendizado interativo
+
+O objetivo do projeto é estudar a integração entre modelos de linguagem, recuperação de informação e agentes inteligentes aplicados ao contexto acadêmico.
+
+---
+
+# Objetivo do Projeto
+
+Este projeto foi desenvolvido para a disciplina de Inteligência Artificial com foco em:
+
+- construção de assistentes inteligentes
+- integração de LLMs
+- recuperação semântica de informações
+- tool calling
+- aprendizado interativo
+- engenharia de sistemas baseados em IA
+
+O sistema busca auxiliar estudantes em:
+- organização acadêmica
+- consultas a materiais
+- revisão de conteúdos
+- planejamento de estudos
 
 ---
 
 # Funcionalidades
 
-## Gerenciamento de tarefas
+## 1. Sistema RAG (Retrieval Augmented Generation)
 
-O Jarvis consegue:
-
-- Adicionar tarefas
-- Listar tarefas
-- Concluir tarefas
-
-### Exemplos
-
-```bash
-preciso estudar matemática
-listar tarefas
-concluir tarefa 3
-```
-
----
-
-## Agenda
-
-O sistema também possui gerenciamento simples de agenda.
-
-### Funcionalidades
-
-- Adicionar eventos
-- Consultar agenda
-
-### Exemplos
-
-```bash
-adicionar prova de cálculo quinta
-listar agenda
-```
-
----
-
-## Sistema RAG (Retrieval Augmented Generation)
-
-O Jarvis consegue responder perguntas utilizando PDFs carregados na pasta `data/`.
+O Jarvis consegue responder perguntas utilizando documentos acadêmicos carregados na pasta `data/`.
 
 ### O sistema realiza:
 
-- Leitura de PDFs
-- Divisão em chunks
-- Geração de embeddings
-- Indexação vetorial com FAISS
-- Busca semântica
-- Geração de respostas com LLM
+- leitura de PDFs
+- divisão em chunks
+- geração de embeddings
+- indexação vetorial com FAISS
+- recuperação semântica
+- geração de respostas utilizando LLM
 
 ### Exemplos
 
@@ -72,16 +56,54 @@ me explique roteamento
 
 ---
 
-## Quiz Interativo
+## 2. Gerenciamento de tarefas
 
-O sistema consegue gerar perguntas automaticamente utilizando o conteúdo dos PDFs.
+O sistema permite:
+
+- adicionar tarefas
+- listar tarefas
+- concluir tarefas
+
+### Exemplos
+
+```bash
+preciso estudar matemática
+listar tarefas
+concluir tarefa 3
+```
+
+---
+
+## 3. Agenda acadêmica
+
+O Jarvis também possui gerenciamento de agenda acadêmica.
+
+### Funcionalidades
+
+- adicionar eventos
+- consultar agenda
+- listar compromissos
+
+### Exemplos
+
+```bash
+adicionar prova de cálculo quinta
+listar agenda
+```
+
+---
+
+## 4. Quiz Interativo e Active Recall
+
+O sistema consegue gerar perguntas automaticamente utilizando os conteúdos dos PDFs carregados.
 
 ### Fluxo
 
 1. Recupera contexto usando RAG
-2. Gera perguntas
-3. Recebe resposta do usuário
+2. Gera perguntas automaticamente
+3. Recebe respostas do usuário
 4. Avalia automaticamente
+5. Fornece feedback
 
 ### Exemplos
 
@@ -89,6 +111,81 @@ O sistema consegue gerar perguntas automaticamente utilizando o conteúdo dos PD
 me teste sobre LSPI
 me teste sobre roteamento
 ```
+
+---
+
+# Tool Calling
+
+O sistema utiliza tool calling para permitir que a LLM decida automaticamente quais ferramentas utilizar com base na intenção do usuário.
+
+## Ferramentas implementadas
+
+- adicionar_tarefa
+- listar_tarefas
+- concluir_tarefa
+- consultar_agenda
+- buscar_material_rag
+
+## Fluxo do Tool Calling
+
+1. Usuário envia mensagem
+2. LLM interpreta intenção
+3. Sistema seleciona ferramenta adequada
+4. Ferramenta é executada
+5. Resultado retorna para a LLM
+6. Resposta final é gerada
+
+O sistema também registra logs das ferramentas utilizadas.
+
+---
+
+# Dataset
+
+O dataset utilizado contém artigos, apostilas e materiais acadêmicos relacionados a:
+
+- Machine Learning
+- NLP
+- RAG
+- Reinforcement Learning
+- Redes DTN
+- Sistemas Inteligentes
+
+## Origem dos dados
+
+Os documentos foram obtidos de:
+
+- artigos científicos
+- apostilas acadêmicas
+- materiais didáticos
+- ebooks técnicos
+
+## Limitações
+
+- alguns PDFs possuem formatação inconsistente
+- imagens e tabelas não são interpretadas completamente
+- qualidade da recuperação depende da qualidade do chunking
+- documentos muito longos podem gerar recuperação parcial
+
+---
+
+# Estratégia de Chunking
+
+Os documentos são divididos em chunks para melhorar a recuperação semântica.
+
+## Estratégia utilizada
+
+- divisão em trechos menores
+- utilização de overlap entre chunks
+- preservação parcial de contexto
+
+## Impacto no RAG
+
+A estratégia de chunking melhora:
+
+- recuperação de contexto relevante
+- precisão das respostas
+- continuidade semântica
+- qualidade da busca vetorial
 
 ---
 
@@ -112,21 +209,19 @@ me teste sobre roteamento
 jarvis-flavio/
 │
 ├── main.py
-├── RAG.py
+├── rag.py
 ├── aprendizado.py
 ├── quiz.py
 ├── agente.py
 ├── tool_calling.py
 ├── llm.py
 ├── logger.py
+├── database.py
 │
 ├── data/
 │   ├── WangWang-2006.pdf
 │   ├── Zouetal-2019.pdf
 │   └── ...
-│
-├── tarefas.db
-├── agenda.db
 │
 ├── requirements.txt
 └── README.md
@@ -139,7 +234,7 @@ jarvis-flavio/
 ## 1. Clonar o projeto
 
 ```bash
-git clone https://github.com/seuusuario/jarvis-flavio.git
+git clone https://github.com/Flavio238/jarvis-flavio-antonio.git
 ```
 
 ---
@@ -219,15 +314,33 @@ Jarvis: Quais são os desafios...
 
 # Melhorias Futuras
 
-- Interface gráfica
-- Memória conversacional
-- Voz
-- Agente autônomo
-- Integração com Google Calendar
+- interface gráfica
+- memória conversacional
+- voz
+- agente autônomo
+- integração com Google Calendar
 - OCR para PDFs/imagens
-- Busca híbrida
-- Web search
-- Fine-tuning
+- busca híbrida
+- web search
+- fine-tuning
+
+---
+
+# Ferramentas de IA Utilizadas
+
+Durante o desenvolvimento do projeto foram utilizadas ferramentas de IA como apoio para:
+
+- revisão de código
+- sugestões de arquitetura
+- identificação de bugs
+- melhorias no README
+- auxílio na organização do projeto
+
+---
+
+## Ferramentas utilizadas
+
+- ChatGPT (OpenAI)
 
 ---
 
@@ -243,4 +356,3 @@ Projeto desenvolvido para estudos de:
 - NLP
 - Tool Calling
 - LLM Engineering
-
