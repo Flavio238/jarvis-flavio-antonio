@@ -24,10 +24,11 @@ Este projeto foi desenvolvido para a disciplina de Inteligência Artificial com 
 - engenharia de sistemas baseados em IA
 
 O sistema busca auxiliar estudantes em:
+
 - organização acadêmica
 - consultas a materiais
 - revisão de conteúdos
-- planejamento de estudos
+- planejamento simples de estudos
 
 ---
 
@@ -76,7 +77,7 @@ concluir tarefa 3
 
 ## 3. Agenda acadêmica
 
-O Jarvis também possui gerenciamento de agenda acadêmica.
+O Jarvis possui gerenciamento simples de agenda acadêmica.
 
 ### Funcionalidades
 
@@ -93,7 +94,20 @@ listar agenda
 
 ---
 
-## 4. Quiz Interativo e Active Recall
+## 4. Planejamento de Estudos
+
+O sistema consegue auxiliar na priorização de estudos utilizando tarefas e agenda acadêmica.
+
+### Exemplos
+
+```bash
+o que devo priorizar hoje?
+monte um plano de estudos
+```
+
+---
+
+## 5. Quiz Interativo e Active Recall
 
 O sistema consegue gerar perguntas automaticamente utilizando os conteúdos dos PDFs carregados.
 
@@ -129,19 +143,26 @@ O sistema utiliza tool calling para permitir que a LLM decida automaticamente qu
 ## Fluxo do Tool Calling
 
 1. Usuário envia mensagem
-2. LLM interpreta intenção
-3. Sistema seleciona ferramenta adequada
-4. Ferramenta é executada
-5. Resultado retorna para a LLM
-6. Resposta final é gerada
+2. A LLM interpreta a intenção
+3. O sistema identifica a ferramenta apropriada
+4. A ferramenta é executada
+5. O resultado retorna para a LLM
+6. A resposta final é gerada para o usuário
 
-O sistema também registra logs das ferramentas utilizadas.
+## Logs
+
+O sistema registra:
+
+- ferramenta utilizada
+- entrada recebida
+- saída retornada
+- horário da execução
 
 ---
 
 # Dataset
 
-O dataset utilizado contém artigos, apostilas e materiais acadêmicos relacionados a:
+O dataset utilizado contém 10 documentos acadêmicos relacionados a:
 
 - Machine Learning
 - NLP
@@ -159,33 +180,43 @@ Os documentos foram obtidos de:
 - materiais didáticos
 - ebooks técnicos
 
+## Tipo de conteúdo
+
+Os PDFs utilizados possuem:
+
+- conteúdo teórico
+- conceitos de inteligência artificial
+- algoritmos de machine learning
+- técnicas de recuperação semântica
+- exemplos acadêmicos
+
 ## Limitações
 
 - alguns PDFs possuem formatação inconsistente
 - imagens e tabelas não são interpretadas completamente
-- qualidade da recuperação depende da qualidade do chunking
-- documentos muito longos podem gerar recuperação parcial
+- a recuperação depende da qualidade do chunking
+- perguntas muito genéricas podem recuperar contexto parcialmente relevante
 
 ---
 
 # Estratégia de Chunking
 
-Os documentos são divididos em chunks para melhorar a recuperação semântica.
+Os documentos são divididos em chunks para melhorar a recuperação semântica e preservar contexto relevante.
 
 ## Estratégia utilizada
 
-- divisão em trechos menores
+- divisão do texto em trechos menores
 - utilização de overlap entre chunks
-- preservação parcial de contexto
+- preservação parcial de contexto semântico
 
 ## Impacto no RAG
 
 A estratégia de chunking melhora:
 
 - recuperação de contexto relevante
+- continuidade semântica entre trechos
 - precisão das respostas
-- continuidade semântica
-- qualidade da busca vetorial
+- qualidade da busca vetorial utilizando embeddings
 
 ---
 
@@ -206,7 +237,7 @@ A estratégia de chunking melhora:
 # Estrutura do Projeto
 
 ```bash
-jarvis-flavio/
+jarvis-flavio-antonio/
 │
 ├── main.py
 ├── rag.py
@@ -314,15 +345,11 @@ Jarvis: Quais são os desafios...
 
 # Melhorias Futuras
 
-- interface gráfica
-- memória conversacional
-- voz
-- agente autônomo
-- integração com Google Calendar
-- OCR para PDFs/imagens
-- busca híbrida
-- web search
-- fine-tuning
+- melhoria da recuperação semântica
+- melhorias nos prompts utilizados pela LLM
+- expansão do dataset acadêmico
+- melhorias no sistema de quiz
+- melhorias no tratamento de erros
 
 ---
 
@@ -333,14 +360,14 @@ Durante o desenvolvimento do projeto foram utilizadas ferramentas de IA como apo
 - revisão de código
 - sugestões de arquitetura
 - identificação de bugs
-- melhorias no README
+- melhorias na documentação
 - auxílio na organização do projeto
-
----
 
 ## Ferramentas utilizadas
 
 - ChatGPT (OpenAI)
+
+O desenvolvimento, adaptação e entendimento do código foram realizados manualmente.
 
 ---
 
