@@ -1,0 +1,75 @@
+# Análise de Erros
+
+Durante os testes do sistema foram identificadas algumas limitações relacionadas ao processo de recuperação semântica, geração de respostas e interpretação das entradas do usuário.
+
+---
+
+# Falha 1
+
+## Tipo
+
+Recuperação semântica
+
+## Problema
+
+Em algumas perguntas, o sistema recuperou chunks parcialmente relacionados ao tema solicitado.
+
+## Causa
+
+Alguns documentos possuem conteúdos semelhantes, gerando embeddings semanticamente próximos.
+
+## Possível solução
+
+- melhorar estratégia de chunking
+- aumentar overlap entre chunks
+- melhorar recuperação vetorial
+
+---
+
+# Falha 2
+
+## Tipo
+
+Geração de resposta
+
+## Problema
+
+Algumas respostas geradas pela LLM ficaram incompletas ou superficiais.
+
+## Causa
+
+A qualidade da resposta depende diretamente do contexto recuperado pelo sistema RAG.
+
+## Possível solução
+
+- recuperar mais contexto relevante
+- melhorar prompts utilizados pela LLM
+- melhorar organização dos documentos
+
+---
+
+# Falha 3
+
+## Tipo
+
+Ambiguidade
+
+## Problema
+
+Comandos muito genéricos podem ser interpretados incorretamente pelo sistema.
+
+## Causa
+
+Entradas curtas ou ambíguas dificultam a identificação correta da intenção do usuário.
+
+## Possível solução
+
+- melhorar instruções do sistema
+- adicionar validações extras
+- solicitar confirmação em casos ambíguos
+
+---
+
+# Considerações
+
+Mesmo com essas limitações, o sistema apresentou desempenho satisfatório para consultas acadêmicas, organização de tarefas e aprendizado interativo.
