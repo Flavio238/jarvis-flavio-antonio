@@ -6,7 +6,7 @@ load_dotenv()
 
 client = OpenAI(
     base_url='https://llm.liaufms.org/v1/gemma-3-12b-it',
-    api_key=os.getenv("API_KEY")
+    api_key='REIkURcI7rTTqsTwlJi8MrgnKFwOiqky7Ezh7hH-l-k'
 )
 
 def gerar_resposta(pergunta, contexto):
