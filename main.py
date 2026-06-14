@@ -1,7 +1,8 @@
 from aprendizado import (
     gerar_perguntas,
     gerar_pergunta_unica,
-    avaliar_resposta
+    avaliar_resposta,
+    planejar_estudos
 )
 from logger import salvar_log
 from tool_calling import decidir_tool
@@ -188,6 +189,32 @@ while True:
         salvar_log(
             "quiz_interativo",
             args["topico"],
+            resposta
+        )
+
+    elif tool == "planejar_estudos":
+
+        agenda = listar_agenda()
+
+        tarefas = listar_tarefas()
+
+        contexto = recuperar_contexto(
+            args["objetivo"],
+            modelo,
+            indice,
+            chunks
+        )
+
+        resposta = planejar_estudos(
+            args["objetivo"],
+            agenda,
+            tarefas,
+            contexto
+        )
+
+        salvar_log(
+            "planejar_estudos",
+            args["objetivo"],
             resposta
         )
 

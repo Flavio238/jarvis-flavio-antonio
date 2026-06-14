@@ -5,7 +5,11 @@ import os
 load_dotenv()
 
 client = OpenAI(
+<<<<<<< HEAD
     base_url='https://llm.liaufms.org/v1/gemma-3-12b-it',
+=======
+    base_url='https://llm.liaufms.org/v1/qwen2-5-14b-instruct-awq',
+>>>>>>> 98964da (Segunda entrega - Tool Calling, Planejamento e Quiz)
     api_key='REIkURcI7rTTqsTwlJi8MrgnKFwOiqky7Ezh7hH-l-k'
 )
 
@@ -38,7 +42,7 @@ Pergunta:
 {pergunta}
 """
     resposta = client.chat.completions.create(
-        model="google/gemma-3-12b-it",
+        model='Qwen/Qwen2.5-14B-Instruct-AWQ',
         temperature=0.2,
         messages=[
             {

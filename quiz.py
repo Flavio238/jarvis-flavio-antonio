@@ -30,7 +30,7 @@ Explique resumidamente o motivo.
 """
 
     resposta = client.chat.completions.create(
-        model="google/gemma-3-12b-it",
+        model='Qwen/Qwen2.5-14B-Instruct-AWQ',
         temperature=0.2,
         messages=[
             {

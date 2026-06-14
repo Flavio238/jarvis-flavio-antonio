@@ -1,10 +1,5 @@
-from openai import OpenAI
+from llm import client
 import json
-
-client = OpenAI(
-    base_url='https://llm.liaufms.org/v1/gemma-3-12b-it',
-    api_key='Cxt2ftLF7d3mHS2JdiFqB-eSDAQeZvFATPXPs02lV9A'
-)
 
 def decidir_tool(pergunta):
 
@@ -26,6 +21,7 @@ Ferramentas disponíveis:
 4. consultar_agenda
 5. buscar_material_rag
 6. gerar_perguntas
+7. planejar_estudos
 
 Exemplos:
 
@@ -35,6 +31,24 @@ Resposta:
     "tool": "adicionar_tarefa",
     "args": {{
         "tarefa": "estudar IA"
+    }}
+}}
+
+Pergunta: preciso estudar banco de dados
+Resposta:
+{{
+    "tool": "adicionar_tarefa",
+    "args": {{
+        "tarefa": "banco de dados"
+    }}
+}}
+
+Pergunta: preciso estudar redes neurais
+Resposta:
+{{
+    "tool": "adicionar_tarefa",
+    "args": {{
+        "tarefa": "redes neurais"
     }}
 }}
 
@@ -81,6 +95,33 @@ Resposta:
     }}
 }}
 
+Pergunta: monte um plano de estudos para IA
+Resposta:
+{{
+    "tool": "planejar_estudos",
+    "args": {{
+        "objetivo": "IA"
+    }}
+}}
+
+Pergunta: o que devo priorizar hoje?
+Resposta:
+{{
+    "tool": "planejar_estudos",
+    "args": {{
+        "objetivo": "prioridades do dia"
+    }}
+}}
+
+Pergunta: tenho prova de embeddings semana que vem
+Resposta:
+{{
+    "tool": "planejar_estudos",
+    "args": {{
+        "objetivo": "prova de embeddings"
+    }}
+}}
+
 Pergunta: oi
 Resposta:
 {{
@@ -105,6 +146,42 @@ Resposta:
     "tool": "quiz_interativo",
     "args": {{
         "topico": "LSPI"
+    }}
+}}
+
+Pergunta: me teste sobre machine learning
+Resposta:
+{{
+    "tool": "quiz_interativo",
+    "args": {{
+        "topico": "machine learning"
+    }}
+}}
+
+Pergunta: faça um quiz sobre IA
+Resposta:
+{{
+    "tool": "quiz_interativo",
+    "args": {{
+        "topico": "IA"
+    }}
+}}
+
+Pergunta: quero ser testado sobre embeddings
+Resposta:
+{{
+    "tool": "quiz_interativo",
+    "args": {{
+        "topico": "embeddings"
+    }}
+}}
+
+Pergunta: faça uma pergunta sobre machine learning
+Resposta:
+{{
+    "tool": "quiz_interativo",
+    "args": {{
+        "topico": "machine learning"
     }}
 }}
 
@@ -147,7 +224,7 @@ Pergunta do usuário:
 """
 
     resposta = client.chat.completions.create(
-        model="google/gemma-3-12b-it",
+        model='Qwen/Qwen2.5-14B-Instruct-AWQ',
         temperature=0,
         messages=[
             {
@@ -173,6 +250,7 @@ Pergunta do usuário:
     "gerar_perguntas",
     "conversa_normal",
     "quiz_interativo",
+    "planejar_estudos",
     "desconhecido"
     ]
 
