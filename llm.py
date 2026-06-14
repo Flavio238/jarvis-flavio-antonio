@@ -5,11 +5,7 @@ import os
 load_dotenv()
 
 client = OpenAI(
-<<<<<<< HEAD
-    base_url='https://llm.liaufms.org/v1/gemma-3-12b-it',
-=======
     base_url='https://llm.liaufms.org/v1/qwen2-5-14b-instruct-awq',
->>>>>>> 98964da (Segunda entrega - Tool Calling, Planejamento e Quiz)
     api_key='REIkURcI7rTTqsTwlJi8MrgnKFwOiqky7Ezh7hH-l-k'
 )
 
